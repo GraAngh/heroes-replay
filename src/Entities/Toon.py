@@ -78,7 +78,11 @@ class Toon:
         self._realm = Realm( int( data["m_realm"] ) )
         self._region = Region( int( data["m_region"] ) )
         self._programId = data["m_programId"]
-                
+        self._repr = self.toString()
+    
+    def getRepr(self):
+        return self._repr
+    
     def getId(self):
         return self._id
     

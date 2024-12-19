@@ -56,7 +56,8 @@ class ListPagination(AbstractPagination):
     def getResult(self):
         return self.__result
         
-    def getResultLengh(self):
+    def getResultLength(self):
         return self.__resultLen
-        
-        
+    
+    def sort(self, cb):
+        self.__result = cb(self.__result)

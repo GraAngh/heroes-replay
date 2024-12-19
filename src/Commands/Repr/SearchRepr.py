@@ -15,16 +15,9 @@ class SearchRepr:
             
     def show(self):
         self.__show(self._pagination.page())
-        
     
-    def sortByDate(self, asce = True):
-        self._result = sorted(
-            self._result
-          , key=lambda r: r['replay'].getDetails().getDatetime() 
-        )
-        
     def hasData(self):
-        return self._pagination.getResultLengh()
+        return self._pagination.getResultLength()
         
     def forward(self):
         self.__show(self._pagination.forward())
@@ -37,3 +30,57 @@ class SearchRepr:
         
     def first(self, amount):
         self._pagination.first(amount)
+        
+    def sort(self, args):
+        reverse = False
+        sortType = '-d'
+        for o, v in args:
+            if o == '-r':
+                reverse = True
+            elif o == '-n':
+               sortType = '-n'
+            elif o == '-t':
+               sortType = '-t'
+            elif o == '-m':
+               sortType = '-m'
+        
+        def sortCb(data):
+            if sortType == '-d':
+                return self.__sortByDate(data, reverse)
+            elif sortType == '-n':
+                return self.__sortByName(data, reverse)
+            elif sortType == '-t':
+                return self.__sortByToon(data, reverse)
+            elif sortType == '-m':
+                return self.__sortByMap(data, reverse)
+            return data
+        
+        self._pagination.sort( sortCb )
+    
+    def __sortByDate(self, data, reverse):
+        return sorted(
+            data
+          , key = lambda item: item['replay'].getDetails().getDatetime() 
+          , reverse = reverse
+        )
+    
+    def __sortByName(self, data, reverse):
+        return sorted(
+            data
+          , key = lambda item: item['player'].getName()
+          , reverse = reverse
+        )
+        
+    def __sortByToon(self, data, reverse):
+        return sorted(
+            data
+          , key = lambda item: item['player'].getToon().getRepr()
+          , reverse = reverse
+        )
+        
+    def __sortByMap(self, data, reverse):
+        return sorted(
+            data
+          , key = lambda item: item['replay'].getTitle()
+          , reverse = reverse
+        )

@@ -191,6 +191,12 @@ class HeroShell(cmd.Cmd):
                   , 'ra:d:o:'
                 )
             
+            if command == self.CMD_SORT:
+                return getopt.getopt(
+                    args
+                  , 'rntm'
+                )
+            
             """ 
             данная ветка приводит к общему виду, 
             когда дополнительных опций и нет 
@@ -500,7 +506,11 @@ class HeroShell(cmd.Cmd):
         elif self._mode == self.MODE_TOON:
             cmd.execForToon( self._lastRepr.getToon() )
         self._lastRepr.show()
-     
+    
+    def do_sort(self, line):
+        args, rest = self.parse(self.CMD_SORT, line)
+        self._lastRepr.sort(args)
+        self._lastRepr.show()
     
 #################################    
 #

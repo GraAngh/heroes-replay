@@ -34,9 +34,9 @@ class Team:
             self._oppositeTeam.setWin(not f_win, False)
     
     def isWon(self):
-        if self._win() == 0:
+        if self._win == 0:
             raise Exception('Значение победы команды не было установлено') 
-        return  bool( self._win() - 1 ) 
+        return  bool( self._win - 1 ) 
     
     # реализовывать отвязывания не нужно, команды существуют 
     # объект будет создаваться, заполняться и уничтожаться после отработки сразу
@@ -55,7 +55,7 @@ class Team:
         # связывание
         team.setOppositeTeam(self)
     
-    def getOppositeTeam(slef):
+    def getOppositeTeam(self):
         return self._oppositeTeam  
     
     def getPlayers(self):

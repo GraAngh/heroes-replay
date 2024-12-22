@@ -14,16 +14,17 @@ class Replay:
     
     @staticmethod
     def getInstance(path, extracter):
-        hash = sha256( path.encode('utf-8') ).hexdigest()
+        r = Replay(path, extracter)
+        date  = r.getDate() 
+        title = r.getTitle()
+        id = sha256( f'{title}_{date}'.encode('utf-8') ).hexdigest()
         
-        if hash not in Replay.__replayes:
-            r = Replay(path, extracter)
-            if r.isRelevant():
-                Replay.__replayes[hash] = r
-            else:
-                return None
-        
-        return Replay.__replayes[hash]
+        if id in Replay.__replayes:
+            return r
+        if not r.isRelevant():
+            return None
+        Replay.__replayes[id] = r
+        return r
     
     """
     @param extracter {Extracter} класс получения конкертных данных из исходного 

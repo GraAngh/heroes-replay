@@ -113,15 +113,15 @@ class Details:
         return self._players
         
     def getTeam(self, id):
-        team = self._players[0].team()
+        team = self._players[0].getTeam()
         if team.id() == id:
             return team
         else: 
-            return team.oppositeTeam()
+            return team.getOppositeTeam()
         
     def getTeams(self):
-        team = self.team(Team.A)
-        return [team, team.oppositeTeam()]
+        team = self._players[0].getTeam()
+        return [team, team.getOppositeTeam()]
     
     def getTicks(self):
         return self._ticks

@@ -1,6 +1,6 @@
 class SearchRepr:
     def __init__(self, pagination):
-        self._pagination = pagination
+        self.__pagination = pagination
     
     def __show(self, page):
         if not page:
@@ -9,27 +9,27 @@ class SearchRepr:
             name = data['replay'].getName()
             player = data['player'].toString()
             print(f'{i}. {player} {name}')
-        pagesLen = self._pagination.getPagesAmount() - 1
-        currentPage = self._pagination.currentNumber()
+        pagesLen = self.__pagination.getPagesAmount() - 1
+        currentPage = self.__pagination.currentNumber()
         print(f'--- {currentPage}/{pagesLen} ---')
             
     def show(self):
-        self.__show(self._pagination.page())
+        self.__show(self.__pagination.page())
     
     def hasData(self):
-        return self._pagination.getResultLength()
+        return self.__pagination.getResultLength()
         
     def forward(self):
-        self.__show(self._pagination.forward())
+        self.__show(self.__pagination.forward())
     
     def back(self):
-        self.__show(self._pagination.back())
+        self.__show(self.__pagination.back())
         
     def at(self, num):
-        self.__show(self._pagination.at(num))
+        self.__show(self.__pagination.at(num))
         
     def first(self, amount):
-        self._pagination.first(amount)
+        self.__pagination.first(amount)
         
     def sort(self, args):
         reverse = False
@@ -55,7 +55,7 @@ class SearchRepr:
                 return self.__sortByMap(data, reverse)
             return data
         
-        self._pagination.sort( sortCb )
+        self.__pagination.sort( sortCb )
     
     def __sortByDate(self, data, reverse):
         return sorted(
@@ -84,3 +84,6 @@ class SearchRepr:
           , key = lambda item: item['replay'].getTitle()
           , reverse = reverse
         )
+        
+    def getPagination(self):
+        return self.__pagination

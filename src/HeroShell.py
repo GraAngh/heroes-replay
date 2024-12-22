@@ -204,6 +204,7 @@ class HeroShell(cmd.Cmd):
             if (
                 command == self.CMD_FIRST or
                 command == self.CMD_AT or
+                command == self.CMD_REPLAY or
                 command == self.CMD_TOOGLE 
             ):
                 return [[], args]
@@ -399,9 +400,6 @@ class HeroShell(cmd.Cmd):
         self.pushOldMode(self.MODE_ACCOUNTS, repr)
         repr.show()
     
-    def do_account(self, line):
-        print('Not implemented')
-    
     def do_forward(self, line):
         """
     Следующая набор данных
@@ -511,6 +509,23 @@ class HeroShell(cmd.Cmd):
         args, rest = self.parse(self.CMD_SORT, line)
         self._lastRepr.sort(args)
         self._lastRepr.show()
+    
+    def do_replay(self, line):
+        args, rest = self.parse(self.CMD_REPLAY, line)
+        pag = self._lastRepr.getPagination()
+        if self._mode == self.MODE_SEARCH:
+            cmd = ReplayPicker( pag.getResult(), pag.getResultLength() )
+        repr = cmd.exec(args, rest)
+        if not repr:
+            return
+        self.pushOldMode(self.MODE_REPLAY, repr)
+        repr.show()
+        
+    def do_player(self, line):
+        print('Not implemented')
+    
+    def do_account(self, line):
+        print('Not implemented')
     
 #################################    
 #

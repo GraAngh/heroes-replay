@@ -59,5 +59,6 @@ class ListPagination(AbstractPagination):
     def getResultLength(self):
         return self.__resultLen
     
+    # ¨Это метод-обертка для вызываемой функции сортировки на результирующем массиве
     def sort(self, cb):
         self.__result = cb(self.__result)

@@ -83,7 +83,42 @@ class Search:
             )):
                 break
         
-        return SearchRepr( ListPagination(
-            resultSet
+        # сборка представления
+        repr = SearchRepr( pagination = ListPagination(
+            self.__unique(resultSet)
           , config.get('PAGE_FIRST_ITEMS_REPR')
         ) )
+        repr.sort()
+        return repr
+    
+    """
+    Проверка идет слева направо
+    
+    Берется крайний левый элемент и сравнивается со всеми правее
+    
+    После полной проверки идет смещение левого элемента на шаг вправо,
+    повторяется проверка
+    
+    В случае отсутсвия совпадения: элемент добавляется в новый массив с конца
+    
+    В случае наличия совпадения: происходит незамедлительное смещение 
+    левого жлемента на шаг вперед без добавления в конечный массив
+    """
+    def __unique(self, resultSet):
+        result = []
+        length = len(resultSet)
+        i = 0
+        while i < length:
+            unique = True
+            current = resultSet[i]
+            j = i + 1
+            while j < length:
+                observed = resultSet[j]
+                if current['replay'] == observed['replay']:
+                    unique = False
+                    break
+                j += 1
+            if unique:
+                result.append(current)
+            i += 1
+        return result

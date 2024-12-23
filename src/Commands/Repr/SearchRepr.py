@@ -31,7 +31,7 @@ class SearchRepr:
     def first(self, amount):
         self.__pagination.first(amount)
         
-    def sort(self, args):
+    def sort(self, args = []):
         reverse = False
         sortType = '-d'
         for o, v in args:

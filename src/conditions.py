@@ -109,6 +109,8 @@ def isTeamates(names, details):
 def isOppenents( player, names, details ):
 	pass
 
+# это внешняя проверка, не гарантирующая, что файл является реплеем.
+# Т.е. прредположим, что внутри данные реплея
 def isReplaySource( path ):
 	basename, ext = os.path.splitext( path )
 	return ext == '.StormReplay'

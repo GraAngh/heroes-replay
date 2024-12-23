@@ -18,9 +18,9 @@ class Replay:
         date  = r.getDate() 
         title = r.getTitle()
         id = sha256( f'{title}_{date}'.encode('utf-8') ).hexdigest()
-        
+ 
         if id in Replay.__replayes:
-            return r
+            return Replay.__replayes[id]
         if not r.isRelevant():
             return None
         Replay.__replayes[id] = r

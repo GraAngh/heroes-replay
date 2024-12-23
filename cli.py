@@ -30,7 +30,6 @@ if __name__ == '__main__':
     try:
         just_fix_windows_console()
         
-        # подготовка снглетона Config
         config = Config.getInstance( 
             Config.MAIN, 
             MAIN_CONFIG_FILE,

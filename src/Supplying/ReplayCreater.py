@@ -8,8 +8,6 @@ class ReplayCreater:
         self._extracter = extracter
         
     def create(self, path):
-        # это внешняя проверка, не гарантирующая, что файл является реплеем.
-        # Т.е. прредположим, что внутри данные реплея
         if not conditions.isReplaySource(path):
             return None
         return Replay.getInstance( path, self._extracter )        

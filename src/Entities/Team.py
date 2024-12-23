@@ -27,16 +27,21 @@ class Team:
     def getWin(self):
         return self._win
         
-    def setWin(self, f_win, reciprocal = True):
-        self._win = f_win    
+    def setWin(self, result, reciprocal = True):
+        if result == self.WIN:
+            self._win = self.WIN
+            if reciprocal:
+                self._oppositeTeam.setWin(self.LOSE, False)
+        else:
+            self._win = self.LOSE
+            if reciprocal:
+                self._oppositeTeam.setWin(self.WIN, False)
         # для установки флага противположной команды с предотвращением цикличности
-        if reciprocal:
-            self._oppositeTeam.setWin(not f_win, False)
     
     def isWon(self):
         if self._win == 0:
             raise Exception('Значение победы команды не было установлено') 
-        return  bool( self._win - 1 ) 
+        return  self._win == self.WIN
     
     # реализовывать отвязывания не нужно, команды существуют 
     # объект будет создаваться, заполняться и уничтожаться после отработки сразу

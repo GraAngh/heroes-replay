@@ -1,7 +1,7 @@
 {
     "HERO_USERS_DATA_DIRS": [
         "%USERPROFILE%\\Documents\\Heroes of the Storm",
-        "E:\\Games\\Heroes of the Storm\\UsersData",
+        "E:\\Games\\Heroes of the Storm\\UserData",
         "E:\\Games\\Heroes of the Storm\\UsersDataWin10"
     ],
     "PAGE_FIRST_ITEMS_REPR": 40,

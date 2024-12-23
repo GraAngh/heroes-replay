@@ -88,7 +88,7 @@ class Search:
             self.__unique(resultSet)
           , config.get('PAGE_FIRST_ITEMS_REPR')
         ) )
-        repr.sort()
+        repr.sort([('-r','')])
         return repr
     
     """

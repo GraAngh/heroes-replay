@@ -20,9 +20,9 @@ class ReplayRepr:
             )
         else:
             lines.append(
-                '{:>40}'.format('WIN')
+                '{:>42}'.format('WIN')
             )
-        lines.append('  {:->72}'.format(' '))
+        lines.append('  {:->70}'.format(' '))
         # Вертикальный вывод 
         pAmount = len(aPlayers) 
         i = 0

@@ -205,7 +205,8 @@ class HeroShell(cmd.Cmd):
                 command == self.CMD_FIRST or
                 command == self.CMD_AT or
                 command == self.CMD_REPLAY or
-                command == self.CMD_TOOGLE 
+                command == self.CMD_TOOGLE or
+                command == self.CMD_PLAYER
             ):
                 return [[], args]
         except getopt.GetoptError as err:
@@ -522,7 +523,25 @@ class HeroShell(cmd.Cmd):
         repr.show()
         
     def do_player(self, line):
-        print('Not implemented')
+        args, rest = self.parse(self.CMD_PLAYER, line)
+        if self._mode == self.MODE_INIT:
+            print('Not implemented')
+            return
+        elif self._mode == self.MODE_SEARCH:
+            pag = self._lastRepr.getPagination()
+            cmd = PlayerPicker(pag.getResult(), pag.getResultLength())
+            repr = cmd.execForSearch(args, rest)
+        elif self._mode == self.MODE_REPLAY:
+            replay = self._lastRepr.getResult()
+            players = replay.getPlayers()
+            cmd = PlayerPicker(players, len(players))
+            repr = cmd.execForReplay(args, rest)
+        
+        
+        if not repr:
+            return
+        self.pushOldMode(self.MODE_PLAYER, repr)
+        repr.show()        
     
     def do_account(self, line):
         print('Not implemented')
@@ -600,6 +619,7 @@ HeroShell.pageCommands = [
 ]
 
 HeroShell.replayCommands = [ 
+    HeroShell.CMD_PLAYER,
 
 ]
 

@@ -57,7 +57,9 @@ class Details:
         self._offset = data['m_timeLocalOffset']
         self._ticks = data['m_timeUTC']
         self._title = data['m_title']
-        self._players = self.__createPlayers( data['m_playerList'] )
+        self._playersData = data['m_playerList']
+        self._players = None
+    
     
     """
     Метод создает экземпляр на основе данных из Details
@@ -109,7 +111,11 @@ class Details:
     def getTitle(self):
         return self._title
     
-    def getPlayers(self):
+    def getPlayers(self):  
+        # Отложенное создание игроков 
+        if not self._players:
+            self._players = self.__createPlayers( self._playersData ) 
+            self._playersData = None
         return self._players
         
     def getTeam(self, id):

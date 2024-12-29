@@ -43,4 +43,6 @@ class ReplayRepr:
             i += 1
         lines.append('')
         print('\n'.join(lines))
-        
+    
+    def getResult(self):
+        return self.__replay

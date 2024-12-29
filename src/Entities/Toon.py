@@ -95,7 +95,7 @@ class Toon:
     def getProgramId(self):
         return self._programId
     
-    def getPlayers():
+    def getPlayers(self):
         return self._players
     
     def addPlayer(self, player, reciprocal = True):

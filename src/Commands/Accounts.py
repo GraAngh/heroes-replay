@@ -14,18 +14,7 @@ class Accounts:
         self.__accounts = []
     
     def exec(self, args, rest):
-        # жестко вшитая стратегия в процедуру
         userStates = Config.getInstance( Config.USER_STATES )
-        disAccs = userStates.get(DISABLED_ACCOUNTS)
-        disToons= userStates.get(DISABLED_TOONS)
-        
-        if not disAccs:
-            disAccs = {}
-            userStates.set(DISABLED_ACCOUNTS, disAccs)
-        
-        if not disToons:
-            disToons = {}
-            userStates.set(DISABLED_TOONS, disToons) 
         
         def collect_accounts(acc, toon):
             if acc not in self.__accounts: 
@@ -42,6 +31,6 @@ class Accounts:
         
         return AccountsRepr(
             pagination
-          , disAccs
-          , disToons
+          , userStates.get(DISABLED_ACCOUNTS)
+          , userStates.get(DISABLED_TOONS)
         )

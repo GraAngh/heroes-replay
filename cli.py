@@ -24,7 +24,7 @@ from colorama import just_fix_windows_console
 ROOT_DIR = path.split(__file__)[0]
 MAIN_CONFIG_FILE = f'{ROOT_DIR}\config.json'
 CACHE_DIR = 'cache'
-USER_STATES_FILE = f'%TMP%\hero-replay-user-states.json'
+USER_STATES_FILE = f'%TMP%\heroes-replay-user-states.json'
 
 if __name__ == '__main__':
     try:
@@ -44,6 +44,10 @@ if __name__ == '__main__':
             Config.F_ALL
         )
         userStates.load(False)
+        userStates.initDefaultProps([
+            ('DISABLED_ACCOUNTS', {}),
+            ('DISABLED_TOONS', {})
+        ])
         
         cacher = HeroCacher( config.get('CACHE_DIR') )
         dataExtracter = DataExtracter(cacher)

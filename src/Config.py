@@ -93,3 +93,9 @@ class Config:
         if p in self.__config:
             return self.__config[p]
         return None
+        
+    def initDefaultProps(self, items, f_expand = False):
+        for item in items:
+            if item[0] not in self.__config:
+                self.set( item[0], item[1], f_expand )
+    

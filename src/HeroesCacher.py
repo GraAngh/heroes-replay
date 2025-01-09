@@ -1,12 +1,9 @@
 from os import path
+from pathlib import Path
 import json
 
-# @TODO
-# Переделать в обычную реализацию, где разбивается по папкам внутри корневой папки кэша
-class HeroCacher:
-    def __init__(self, dir):
-        self._dir = dir
-       
+
+class HeroesCacher:
     # default json handler callback 
     @classmethod
     def __defaultJsonHandler(obj):
@@ -19,20 +16,25 @@ class HeroCacher:
                 return obj.hex()
             return None
     
-    def replayKey(self, file):
+    def __init__(self, cacheRootdir):
+        self.__cacheRootDir = cacheRootdir
+        if not Path(cacheRootdir).is_dir():
+            raise FileNotFoundError(cacheRootdir)
+    
+    def getReplayName(self, file):
         base =  path.basename( file )
         return path.splitext( base )[0]
     
     # создание пути к файлу хранения кэша
     def makePath(self, sourceFile, subdir):
-        key = self.replayKey(sourceFile)
-        return path.join(self._dir, subdir, key + '.json')
+        replayName = self.getReplayName(sourceFile)
+        return path.join(self.__cacheRootDir, subdir, replayName + '.json')
 
     # запись кэша
     def write(self, sourceFile, arg, data):
         cacheFile = self.makePath(sourceFile, arg)
         with open(cacheFile, 'w', encoding="utf-8") as f:
-            f.write( json.dumps(data, default=HeroCacher.__defaultJsonHandler, indent=4) )
+            f.write( json.dumps(data, default=HeroesCacher.__defaultJsonHandler, indent=4) )
 
     # чтение кэша
     def read(self, sourceFile, arg):
@@ -47,4 +49,11 @@ class HeroCacher:
         finally:
             if f != None:
                 f.close()
-                
+    
+    # есть необходимость создать директории для отедльынх команд динамически
+    # актуально только для первично пустой корневой директории кэша
+    def prepareDir(self, name):
+        try:
+            Path(f'{self.__cacheRootDir}/{name}').mkdir(parents=True, exist_ok=True)
+        except FileExistsError:
+            pass

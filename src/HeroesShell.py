@@ -5,7 +5,7 @@ from .Supplying.ReplayCreater import ReplayCreater
 from .Supplying.CommonStorageSupplyingStrategy import CommonStorageSupplyingStrategy
 from .Supplying.CommonReplaySupplyingStrategy import CommonReplaySupplyingStrategy
 
-class HeroShell(cmd.Cmd):
+class HeroesShell(cmd.Cmd):
     WRONG_CMD_PREFIX = '__not_relevant_cmd__'
    
    #COMMANDS CONSTS
@@ -231,18 +231,18 @@ class HeroShell(cmd.Cmd):
             return True
         
         # команды по режимам
-        if self._mode == HeroShell.MODE_INIT:
+        if self._mode == HeroesShell.MODE_INIT:
             if command in self.initCommands: 
                 return True
         
-        elif self._mode == HeroShell.MODE_SEARCH:
+        elif self._mode == HeroesShell.MODE_SEARCH:
             if (
                 command in self.searchCommands or
                 command in self.pageCommands
             ):
                 return True   
         
-        elif self._mode == HeroShell.MODE_ACCOUNTS:
+        elif self._mode == HeroesShell.MODE_ACCOUNTS:
             if (
                 command in self.accountsCommands or
                 command in self.pageCommands or
@@ -250,25 +250,25 @@ class HeroShell(cmd.Cmd):
             ):
                 return True   
         
-        elif self._mode == HeroShell.MODE_ACCOUNT:
+        elif self._mode == HeroesShell.MODE_ACCOUNT:
             if (
                 command in self.accountCommands or
                 command in self.toogleCommands
             ) :
                 return True   
         
-        elif self._mode == HeroShell.MODE_TOON:
+        elif self._mode == HeroesShell.MODE_TOON:
             if (
                 command in self.toonCommands or
                 command in self.toogleCommands
             ) :
                 return True   
         
-        elif self._mode == HeroShell.MODE_PLAYER:
+        elif self._mode == HeroesShell.MODE_PLAYER:
             if command in self.playerCommands:
                 return True   
         
-        elif self._mode == HeroShell.MODE_REPLAY:
+        elif self._mode == HeroesShell.MODE_REPLAY:
             if command in self.replayCommands:
                 return True   
         
@@ -279,22 +279,22 @@ class HeroShell(cmd.Cmd):
         if self._mode == newMode:
             return False
         
-        if newMode == HeroShell.MODE_INIT:
+        if newMode == HeroesShell.MODE_INIT:
             self.prompt = self.PROMPT_INIT_MODE
         
-        elif newMode == HeroShell.MODE_SEARCH:
+        elif newMode == HeroesShell.MODE_SEARCH:
             self.prompt = self.PROMPT_SEARCH_MODE
         
-        elif newMode == HeroShell.MODE_ACCOUNTS:    
+        elif newMode == HeroesShell.MODE_ACCOUNTS:    
             self.prompt = self.PROMPT_ACCOUNTS_MODE
        
-        elif newMode == HeroShell.MODE_TOON:    
+        elif newMode == HeroesShell.MODE_TOON:    
             self.prompt = self.PROMPT_TOOM_MODE
         
-        elif newMode == HeroShell.MODE_PLAYER:    
+        elif newMode == HeroesShell.MODE_PLAYER:    
             self.prompt = self.PROMPT_PLAYER_MODE
         
-        elif newMode == HeroShell.MODE_REPLAY:    
+        elif newMode == HeroesShell.MODE_REPLAY:    
             self.prompt = self.PROMPT_REPLAY_MODE
         
         
@@ -553,80 +553,80 @@ class HeroShell(cmd.Cmd):
 #################################    
 
 # Псевдонимы команд
-HeroShell.aliaces = {
+HeroesShell.aliaces = {
     # general
-    HeroShell.CMD_EXIT: ['x'],
-    HeroShell.CMD_HELP: ['h'],
-    HeroShell.CMD_RETURN: ['r'],
+    HeroesShell.CMD_EXIT: ['x'],
+    HeroesShell.CMD_HELP: ['h'],
+    HeroesShell.CMD_RETURN: ['r'],
     
     # common mode
-    HeroShell.CMD_SEARCH: ['s'],
-    HeroShell.CMD_ACCOUNTS: ['aa'],
-    HeroShell.CMD_ACCOUNT: ['a'],
-    HeroShell.CMD_TOON: ['t'],
-    HeroShell.CMD_REPLAY: ['rp'],
-    HeroShell.CMD_PLAYER: ['p'],
+    HeroesShell.CMD_SEARCH: ['s'],
+    HeroesShell.CMD_ACCOUNTS: ['aa'],
+    HeroesShell.CMD_ACCOUNT: ['a'],
+    HeroesShell.CMD_TOON: ['t'],
+    HeroesShell.CMD_REPLAY: ['rp'],
+    HeroesShell.CMD_PLAYER: ['p'],
         
     # paged mode
-    HeroShell.CMD_FORWARD: ['f'],
-    HeroShell.CMD_FIRST: ['ft'],
-    HeroShell.CMD_BACK: ['b'],
-    HeroShell.CMD_AT: ['g'],
+    HeroesShell.CMD_FORWARD: ['f'],
+    HeroesShell.CMD_FIRST: ['ft'],
+    HeroesShell.CMD_BACK: ['b'],
+    HeroesShell.CMD_AT: ['g'],
     
     # switch mode
-    HeroShell.CMD_TOOGLE: ['tgl'],
+    HeroesShell.CMD_TOOGLE: ['tgl'],
     
     #misc
-    HeroShell.CMD_FILTER: ['fr']
+    HeroesShell.CMD_FILTER: ['fr']
 }
 
 # Набор комманд по облостям
 
-HeroShell.generalCommands = [ 
-    HeroShell.CMD_EXIT,
-    HeroShell.CMD_HELP,
-    HeroShell.CMD_RETURN
+HeroesShell.generalCommands = [ 
+    HeroesShell.CMD_EXIT,
+    HeroesShell.CMD_HELP,
+    HeroesShell.CMD_RETURN
 ]
 
-HeroShell.initCommands = [ 
-    HeroShell.CMD_SEARCH, 
-    HeroShell.CMD_ACCOUNTS,
-    HeroShell.CMD_PLAYER,
-    HeroShell.CMD_REPLAY,
-    HeroShell.CMD_TOON
+HeroesShell.initCommands = [ 
+    HeroesShell.CMD_SEARCH, 
+    HeroesShell.CMD_ACCOUNTS,
+    HeroesShell.CMD_PLAYER,
+    HeroesShell.CMD_REPLAY,
+    HeroesShell.CMD_TOON
 ]
 
-HeroShell.searchCommands = [ 
-    HeroShell.CMD_FILTER,
-    HeroShell.CMD_PLAYER,
-    HeroShell.CMD_REPLAY,
-    HeroShell.CMD_SORT
+HeroesShell.searchCommands = [ 
+    HeroesShell.CMD_FILTER,
+    HeroesShell.CMD_PLAYER,
+    HeroesShell.CMD_REPLAY,
+    HeroesShell.CMD_SORT
 ]
 
-HeroShell.accountsCommands = [ 
-    HeroShell.CMD_ACCOUNT
+HeroesShell.accountsCommands = [ 
+    HeroesShell.CMD_ACCOUNT
 ]
 
-HeroShell.accountCommands = [ 
+HeroesShell.accountCommands = [ 
   
 ]
 
-HeroShell.pageCommands = [
-    HeroShell.CMD_FORWARD, 
-    HeroShell.CMD_BACK, 
-    HeroShell.CMD_FIRST,
-    HeroShell.CMD_AT
+HeroesShell.pageCommands = [
+    HeroesShell.CMD_FORWARD, 
+    HeroesShell.CMD_BACK, 
+    HeroesShell.CMD_FIRST,
+    HeroesShell.CMD_AT
 ]
 
-HeroShell.replayCommands = [ 
-    HeroShell.CMD_PLAYER,
-
-]
-
-HeroShell.playerCommands = [ 
+HeroesShell.replayCommands = [ 
+    HeroesShell.CMD_PLAYER,
 
 ]
 
-HeroShell.toogleCommands = [
-    HeroShell.CMD_TOOGLE
+HeroesShell.playerCommands = [ 
+
+]
+
+HeroesShell.toogleCommands = [
+    HeroesShell.CMD_TOOGLE
 ]

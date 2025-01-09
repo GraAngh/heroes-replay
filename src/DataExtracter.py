@@ -13,9 +13,25 @@ class DataExtracter:
         
     def __init__(self, cacher):
         self._cacher = cacher
-    
-    def _extract(self, replayFile, arg):
-        p1 = Popen(["python", "-m", "heroprotocol", "--json", "--" + arg, replayFile], stdout = PIPE)
+        cacher.prepareDir(DataExtracter.HEADER)
+        cacher.prepareDir(DataExtracter.DETAILS)
+        cacher.prepareDir(DataExtracter.STATS)
+        cacher.prepareDir(DataExtracter.INIT_DATA)
+        cacher.prepareDir(DataExtracter.ATTR_EVENTS)
+        cacher.prepareDir(DataExtracter.GAME_EVENTS)
+        cacher.prepareDir(DataExtracter.TRACKER_EVENTS)
+        cacher.prepareDir(DataExtracter.MESSAGE_EVENTS)
+        
+    # @param {String} file - путь к файлу повтора *.StormReplay
+    # @param {String} arg - определяет какие данные будут извлекаться (н.п. --details)
+    def _extract(self, file, arg):
+        p1 = Popen([
+            "python", 
+            "-m", 
+            "heroprotocol", 
+            "--json", "--" + arg, 
+            file
+        ], stdout = PIPE)
         data = p1.stdout.read()
         data = data.decode('utf-8')
         if len(data):
@@ -35,19 +51,25 @@ class DataExtracter:
         return self._getterTemplate(file, self.DETAILS)
      
     def getInitData(self, file):
+        # TODO implement
         return None
         
     def getHeader(self, file):
+        # TODO implement
         return None
         
     def getAttributeEvents(self, file):
+        # TODO implement
         return None
         
     def getGameEvents(self, file):
+        # TODO implement
         return None
         
     def getMessageEvents(self, file):
+        # TODO implement
         return None
         
     def getTrackerEvents(self, file):
+        # TODO implement
         return None

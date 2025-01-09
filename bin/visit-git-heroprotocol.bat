@@ -1,1 +1,1 @@
-start https://github.com/Blizzard/heroprotocol/tree/master/heroprotocol
+start https://github.com/GraAngh/heroprotocol

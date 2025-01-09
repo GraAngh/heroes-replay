@@ -15,8 +15,8 @@ from os import path
 from src.Config import Config
 from src.DataExtracter import DataExtracter
 from src.Supplying.ReplayCreater import ReplayCreater
-from src.HeroCacher import HeroCacher
-from src.HeroShell import HeroShell
+from src.HeroesCacher import HeroesCacher
+from src.HeroesShell import HeroesShell
 
 # https://pypi.org/project/colorama/
 from colorama import just_fix_windows_console
@@ -49,9 +49,9 @@ if __name__ == '__main__':
             ('DISABLED_TOONS', {})
         ])
         
-        cacher = HeroCacher( config.get('CACHE_DIR') )
+        cacher = HeroesCacher( config.get('CACHE_DIR') )
         dataExtracter = DataExtracter(cacher)
-        shell = HeroShell( ReplayCreater( dataExtracter ) )
+        shell = HeroesShell( ReplayCreater( dataExtracter ) )
         config.set('HERO_SHELL', shell)
         
         # запуск

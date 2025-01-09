@@ -3,4 +3,4 @@ test
 dump
 cache/**/
 docs/
-pyproject.toml
+*.ignore/
